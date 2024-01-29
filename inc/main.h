@@ -2,7 +2,7 @@
 #define _MAIN_
 
 #include <SDL2/SDL.h>
-
+#include <stdbool.h>
 /**
  * struct SDL_Instance - an instance of SDL
  * @window: a pointer to SDL_Window
@@ -17,7 +17,6 @@ typedef struct SDL_Instance
 
 /* Function definitions */
 int init_maze(SDL_Instance *);
-void close(void);
-int poll_event(void);
+bool poll_event(bool quit);
 
 #endif /* !_MAIN_ */
