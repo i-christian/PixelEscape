@@ -24,6 +24,8 @@ int main(void)
 		quit = poll_event(quit);
 		SDL_SetRenderDrawColor(gInstance.renderer, 0x00, 0xFF, 0x00, 0xFF);
 		SDL_RenderClear(gInstance.renderer);
+		/*Raycasting algorithm */
+		renderWalls(&gInstance);
 		SDL_RenderPresent(gInstance.renderer);
 	}
 

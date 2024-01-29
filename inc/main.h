@@ -18,5 +18,6 @@ typedef struct SDL_Instance
 /* Function definitions */
 int init_maze(SDL_Instance *);
 bool poll_event(bool quit);
+void renderWalls(SDL_Instance *);
 
 #endif /* !_MAIN_ */
