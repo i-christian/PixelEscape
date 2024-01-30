@@ -14,7 +14,7 @@
 
 int init_maze(SDL_Instance *gInstance)
 {
-	int SCREEN_WIDTH = 1260;
+	int SCREEN_WIDTH = 1280;
 	int SCREEN_HEIGTH = 720;
 
 	if (SDL_Init(SDL_INIT_VIDEO) != 0)
@@ -27,7 +27,7 @@ int init_maze(SDL_Instance *gInstance)
 	gInstance->window = SDL_CreateWindow(
 									  "PixelEscape: 3D RaycastingMaze Adventure",
 									  SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
-									  SCREEN_WIDTH, SCREEN_HEIGTH, SDL_WINDOW_SHOWN |
+									  SCREEN_WIDTH, SCREEN_HEIGTH, 0 |
 									  SDL_WINDOW_RESIZABLE);
 	if (gInstance->window == NULL)
 	{
