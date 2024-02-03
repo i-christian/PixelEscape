@@ -4,6 +4,18 @@
 #include <stdbool.h>
 
 /**
+ * cleanup - Maze entry point
+ * @gInstance: param
+ * Return: nothing at all
+ */
+void cleanup(SDL_Instance *gInstance)
+{
+	SDL_DestroyRenderer(gInstance->renderer);
+	SDL_DestroyWindow(gInstance->window);
+	SDL_Quit();
+}
+
+/**
  * main - Maze entry point
  * Return: 0 for success or 1 for error
  */
@@ -22,16 +34,13 @@ int main(void)
 	while (quit == false)
 	{
 		quit = poll_event(quit);
-		SDL_RenderClear(gInstance.renderer);
+			SDL_RenderClear(gInstance.renderer);
 		/*Raycasting algorithm */
 		renderWalls(&gInstance);
 		SDL_RenderPresent(gInstance.renderer);
 	}
 
 	/*Clean up the game*/
-	SDL_DestroyRenderer(gInstance.renderer);
-	SDL_DestroyWindow(gInstance.window);
-	SDL_Quit();
-
+	cleanup(&gInstance);
 	return (0);
 }
