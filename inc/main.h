@@ -1,23 +1,21 @@
 #ifndef _MAIN_
 #define _MAIN_
 
+#include <stdio.h>
+#include <stdlib.h>
 #include <SDL2/SDL.h>
 #include <stdbool.h>
-/**
- * struct SDL_Instance - an instance of SDL
- * @window: a pointer to SDL_Window
- * @renderer: a pointer to SDL_Renderer
- */
 
-typedef struct SDL_Instance
-{
-	SDL_Window *window;
-	SDL_Renderer *renderer;
-} SDL_Instance;
+#include "config.h"
+#include "raycaster.h"
+#include "renderer.h"
+#include "player.h"
+#include "map.h"
+#include "game_data.h"
 
 /* Function definitions */
-int init_maze(SDL_Instance *);
-bool poll_event(bool quit);
-void renderWalls(SDL_Instance *);
+void render(gameData *gameData);
+void handleEvents(gameData *gameData);
+void runGame(gameData *gameData);
 
 #endif /* !_MAIN_ */
