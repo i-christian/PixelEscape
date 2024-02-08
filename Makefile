@@ -27,7 +27,7 @@ OBJS = $(SRCS:.c=.o)
 LIBS = -lSDL2 -lm
 
 # Executable name
-EXEC = maze
+EXEC = PixelEscape
 
 # Targets
 all: $(EXEC)
