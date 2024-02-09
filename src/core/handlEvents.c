@@ -41,8 +41,16 @@ void handleEvents(gameData *gameData) {
                         if(keyIsDown)
 							gameData->showMap = !(gameData->showMap);
                         break;
-                    case SDLK_f:
+                    case SDLK_d:
                         if(keyIsDown) gameData->distortion = !gameData->distortion;
+                        break;
+
+					case SDLK_f:
+                        if(keyIsDown) {
+                            /* Toggle fullscreen mode */
+                            Uint32 fullscreenFlag = SDL_GetWindowFlags(gInstance.window) & SDL_WINDOW_FULLSCREEN;
+                            SDL_SetWindowFullscreen(gInstance.window, fullscreenFlag ? 0 : SDL_WINDOW_FULLSCREEN_DESKTOP);
+                        }
                         break;
                     case SDLK_r:
                         if(keyIsDown) gameData->slowRenderMode = !gameData->slowRenderMode;
