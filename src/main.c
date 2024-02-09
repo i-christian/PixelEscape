@@ -15,7 +15,7 @@ const short MAP[MAP_GRID_HEIGHT][MAP_GRID_WIDTH] = {
 
 /**
  * render - rendering function
- * Return: Nothin
+ * Return: Nothing
  */
 void render(gameData *gameData)
 {
@@ -35,7 +35,10 @@ int setupWindow(gameData *gameData) {
     int x, y;
 
     if(!initGFX("A 3D Raycasting Maze Adventure",
-				WINDOW_WIDTH, WINDOW_HEIGHT)) return FALSE;
+				WINDOW_WIDTH, WINDOW_HEIGHT))
+	{
+		return (FALSE);
+	}
 
     gameData->screenBuffer = createTexture(WINDOW_WIDTH, WINDOW_HEIGHT);
     gameData->redXorTexture = generateRedXorTexture(TEXTURE_SIZE);

@@ -2,11 +2,6 @@
 #include <SDL2/SDL_render.h>
 #include <SDL2/SDL_video.h>
 
-/*========================================================
- * Utility functions
- *========================================================
- */
-
 Uint32* generateXorTexture(int size, int redmask, int greenmask, int bluemask) {
     int x, y;
     float factor = 256.0f / (float)size;
