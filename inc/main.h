@@ -11,6 +11,7 @@
 #include "renderer.h"
 #include "player.h"
 #include "map.h"
+#include "graphics.h"
 #include "game_data.h"
 
 /* Function definitions */
@@ -18,4 +19,4 @@ void render(gameData *gameData);
 void handleEvents(gameData *gameData);
 void runGame(gameData *gameData);
 
-#endif /* !_MAIN_ */
+#endif /* _MAIN_ */

@@ -4,7 +4,6 @@
 
 /* Functions */
 
-
 void renderOverheadMap(gameData *gameData);
 
 #endif /* MAP_H */

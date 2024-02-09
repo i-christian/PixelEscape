@@ -6,7 +6,7 @@ char errstr[256];
 /**gfxGetError - a getter graphics errors function
  *Return: nothing
  */
-const char* gfxGetError() {
+const char* gfxGetError(void) {
     return (errstr);
 }
 

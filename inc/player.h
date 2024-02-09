@@ -15,15 +15,9 @@ extern char turningRight;
 extern char playerIsRunning;
 
 /* Functions */
-
-
-void initPlayer();
-
-
-void updatePlayer();
-
+void initPlayer(void);
+void updatePlayer(void);
 void movePlayer(float dx, float dy);
-
 int clipMovement(float dx, float dy);
 
 #endif /* PLAYER_H */

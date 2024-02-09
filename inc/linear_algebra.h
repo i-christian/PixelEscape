@@ -7,13 +7,19 @@
 #define MAX(A, B)      ((A) > (B) ? (A) : (B))
 
 /* A 3D identity matrix */
-#define IDENTITY_M     {{1,0,0},{0,1,0},{0,0,1}}
+#define IDENTITY_M     {{1, 0, 0}, {0, 1, 0}, {0, 0, 1}}
 
 /* A 2D homogeneous matrix */
 #define HOMOGENEOUS_V3 {0, 0, 1}
 
-/* Types */
-typedef struct {
+/**
+ * struct Vector3f - define a vector representation
+ * @x: first member
+ * @y: second member
+ * @z: third member
+ */
+typedef struct Vector3f
+{
     float x;
     float y;
     float z;
@@ -22,15 +28,15 @@ typedef struct {
 typedef float Matrix3f[3][3];
 
 /* Define Vector & Matrices functions */
-Vector3f vectorAdd(Vector3f* vec1, Vector3f* vec2);
-Vector3f vectorSubtract(Vector3f* vec1, Vector3f* vec2);
-Vector3f homogeneousVectorScale(Vector3f* vec, float scalar);
-Vector3f normalizeVector(Vector3f* vec);
-Vector3f vectorProjection(Vector3f* vec1, Vector3f* vec2);
-float homogeneousVectorMagnitude(Vector3f* vec);
-float vectorDotProduct(Vector3f* vec1, Vector3f* vec2);
-void matrixVectorMultiply(Matrix3f* mat, Vector3f* vec);
-void matrixMatrixMultiply(Matrix3f* mat1, Matrix3f* mat2);
-void matrix3fCopy(Matrix3f* dst, Matrix3f* src);
+Vector3f vectorAdd(Vector3f *vec1, Vector3f *vec2);
+Vector3f vectorSubtract(Vector3f *vec1, Vector3f *vec2);
+Vector3f homogeneousVectorScale(Vector3f *vec, float scalar);
+Vector3f normalizeVector(Vector3f *vec);
+Vector3f vectorProjection(Vector3f *vec1, Vector3f *vec2);
+float homogeneousVectorMagnitude(Vector3f *vec);
+float vectorDotProduct(Vector3f *vec1, Vector3f *vec2);
+void matrixVectorMultiply(Matrix3f *mat, Vector3f *vec);
+void matrixMatrixMultiply(Matrix3f *mat1, Matrix3f *mat2);
+void matrix3fCopy(Matrix3f *dst, Matrix3f *src);
 
 #endif /* LINALG_H */

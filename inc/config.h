@@ -17,7 +17,8 @@ extern char rayCastMode;
 #define EPS   0.00000001
 
 /* Floating point operations */
-#define MAKE_FLOAT_NONZERO(A)  ((fabs((A)) < EPS) ? EPS : A) /* Make any value less than epsilon equal to epsilon */
+/* Make any value less than epsilon equal to epsilon */
+#define MAKE_FLOAT_NONZERO(A)  ((fabs((A)) < EPS) ? EPS : A)
 
 /* Window parameters*/
 #define WINDOW_WIDTH  840
@@ -27,16 +28,18 @@ extern char rayCastMode;
 #define TEXTURE_SIZE           64
 #define WALL_SIZE              64
 #define HUD_MAP_SIZE           WINDOW_HEIGHT
-#define FOV                    (PI / 3.0f)               /* 60 degrees */
+#define FOV                    (PI / 3.0f)  /* 60 degrees */
 #define PLAYER_MOVEMENT_SPEED  5.0f
-#define PLAYER_ROT_SPEED       ((3.0f * (PI)) / 180.0f)  /* 3 degrees per frame */
+ /* 3 degrees per frame */
+#define PLAYER_ROT_SPEED       ((3.0f * (PI)) / 180.0f)
 #define PLAYER_SIZE            20
 
 /* Projection parameters */
 #define VIEWPLANE_LENGTH  WINDOW_WIDTH
 #define VIEWPLANE_DIR_X  -1
 #define VIEWPLANE_DIR_Y   0
-#define PLAYER_DIR_X      0     /* Player direction must be perpendicular to viewplane */
+  /* Player direction must be perpendicular to viewplane */
+#define PLAYER_DIR_X      0
 #define PLAYER_DIR_Y      1
 #define PLAYER_START_X    (2.5f * WALL_SIZE)
 #define PLAYER_START_Y    (2.5f * WALL_SIZE)
@@ -62,8 +65,8 @@ extern char rayCastMode;
 extern const short MAP[MAP_GRID_HEIGHT][MAP_GRID_WIDTH];
 extern char distortion;
 extern char textureMode;
-extern Uint32* screenBuffer;
+extern Uint32 *screenBuffer;
 extern Uint32 COLORS[];
-extern Uint32* TEXTURES[];
+extern Uint32 *TEXTURES[];
 
 #endif /* CONFIG_H */
