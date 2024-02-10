@@ -4,17 +4,19 @@
 CC = gcc
 
 # Compiler flags
-CFLAGS = -Wall -Werror -Wextra -pedantic -std=c99
+CFLAGS = -Wall -Werror -Wextra -pedantic -std=c99 -g
 
 # Directories
 INCDIR = inc
 SRCDIR = src
+AUDDIR = $(SRCDIR)/audio
 COREDIR = $(SRCDIR)/core
 GRAPHICSDIR = $(SRCDIR)/graphics
 
 # Source files
 SRCS = $(wildcard $(SRCDIR)/*.c) \
        $(wildcard $(COREDIR)/*.c) \
+			 $(wildcard $(AUDDIR)/*.c)   \
        $(wildcard $(GRAPHICSDIR)/*.c)
 
 # Header files

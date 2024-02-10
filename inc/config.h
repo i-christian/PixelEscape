@@ -45,8 +45,8 @@ extern char rayCastMode;
 #define PLAYER_START_Y    (2.5f * WALL_SIZE)
 
 /* Map constants */
-#define MAP_GRID_WIDTH    10
-#define MAP_GRID_HEIGHT   10
+#define MAP_GRID_WIDTH    24
+#define MAP_GRID_HEIGHT   24
 #define MAP_PIXEL_WIDTH   (MAP_GRID_WIDTH * WALL_SIZE)
 #define MAP_PIXEL_HEIGHT  (MAP_GRID_HEIGHT * WALL_SIZE)
 

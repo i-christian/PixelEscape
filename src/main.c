@@ -1,6 +1,8 @@
 #include "../inc/main.h"
+#include <SDL2/SDL_audio.h>
+#include <stdio.h>
 
-const short MAP[MAP_GRID_HEIGHT][MAP_GRID_WIDTH] = {
+/*const short MAP[MAP_GRID_HEIGHT][MAP_GRID_WIDTH] = {
 	{R, R, R, R, R, R, R, R, R, R},
 	{R, 0, 0, 0, 0, 0, 0, 0, 0, R},
 	{R, 0, 0, G, G, G, G, G, 0, R},
@@ -8,10 +10,40 @@ const short MAP[MAP_GRID_HEIGHT][MAP_GRID_WIDTH] = {
 	{R, 0, 0, G, 0, G, 0, G, 0, R},
 	{R, 0, 0, 0, 0, G, 0, G, 0, R},
 	{R, 0, G, G, G, G, 0, G, 0, R},
-	{R, 0, 0, 0, 0, 0, 0, G, 0, R},
+	{R, 0, 0, 0,
+		0, 0, 0, G, 0, R},
 	{R, 0, 0, 0, 0, 0, 0, 0, 0, R},
 	{R, R, R, R, R, R, R, R, R, R}
+};*/
+
+const short MAP[MAP_GRID_HEIGHT][MAP_GRID_WIDTH] =
+{
+  {R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R},
+  {R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,R},
+  {R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,R},
+  {R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,R},
+  {R,0,0,0,0,0,G,G,G,G,G,0,0,0,0,B,0,B,0,B,0,0,0,R},
+  {R,0,0,0,0,0,G,0,0,0,G,0,0,0,0,0,0,0,0,0,0,0,0,R},
+  {R,0,0,0,0,0,G,0,0,0,G,0,0,0,0,B,0,0,0,B,0,0,0,R},
+  {R,0,0,0,0,0,G,0,0,0,G,0,0,0,0,0,0,0,0,0,0,0,0,R},
+  {R,0,0,0,0,0,G,G,0,G,G,0,0,0,0,B,0,B,0,B,0,0,0,R},
+  {R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,R},
+  {R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,R},
+  {R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,R},
+  {R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,R},
+  {R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,R},
+  {R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,R},
+  {R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,R},
+  {R,G,G,G,G,G,G,G,G,0,0,0,0,0,0,0,0,0,0,0,0,0,0,R},
+  {R,G,0,G,0,0,0,0,G,0,0,0,0,0,0,0,0,0,0,0,0,0,0,R},
+  {R,G,0,0,0,0,B,0,G,0,0,0,0,0,0,0,0,0,0,0,0,0,0,R},
+  {R,G,0,G,0,0,0,0,G,0,0,0,0,0,0,0,0,0,0,0,0,0,0,R},
+  {R,G,0,G,G,G,G,G,G,0,0,0,0,0,0,0,0,0,0,0,0,0,0,R},
+  {R,G,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,R},
+  {R,G,G,G,G,G,G,G,G,0,0,0,0,0,0,0,0,0,0,0,0,0,0,R},
+  {R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R}
 };
+
 
 /**
  * render - rendering function
@@ -46,7 +78,7 @@ int setupWindow(gameData *gameData) {
     gameData->blueXorTexture = generateBlueXorTexture(TEXTURE_SIZE);
     gameData->grayXorTexture = generateGrayXorTexture(TEXTURE_SIZE);
     gameData->TEXTURES[0] = gameData->redXorTexture;
-    gameData->TEXTURES[1] = gameData->greenXorTexture;
+    gameData->TEXTURES[R] = gameData->greenXorTexture;
     gameData->TEXTURES[2] = gameData->blueXorTexture;
     gameData->TEXTURES[3] = gameData->grayXorTexture;
 
@@ -61,6 +93,24 @@ int setupWindow(gameData *gameData) {
     return (TRUE);
 }
 
+void initAudio(AudioData *audioData)
+{
+	audioData->audioBuffer = NULL;
+    audioData->audioLength = 0;
+    audioData->rw = NULL;
+
+	if (!initSDLAudio(audioData))
+	{
+		fprintf(stderr, "failed to initialize audio");
+
+	}
+
+	if (!loadBackgroundMusic(audioData))
+	{
+		fprintf(stderr, "Failure to load Music\n");
+	}
+}
+
 /**
  * main - the main entry of the program
  * Return: exit status
@@ -68,6 +118,7 @@ int setupWindow(gameData *gameData) {
 
 int main(void)
 {
+
 	gameData gameData;
 	gameData.screenBuffer = NULL;
 	gameData.redXorTexture = NULL;
@@ -76,7 +127,7 @@ int main(void)
 	gameData.grayXorTexture = NULL;
 	/*initialize colors */
 	gameData.COLORS[0] = RGBtoABGR(255, 0, 0);
-    gameData.COLORS[1] = RGBtoABGR(0, 255, 0);
+    gameData.COLORS[R] = RGBtoABGR(0, 255, 0);
     gameData.COLORS[2] = RGBtoABGR(0, 0, 255);
     gameData.COLORS[3] = RGBtoABGR(128, 128, 128);
 	/*program toggles */
@@ -92,10 +143,11 @@ int main(void)
 		fprintf(stderr, "Could not initialize raycaster!\n");
 		return (EXIT_FAILURE);
 	}
+
+	initAudio(&audioData);
 	initPlayer();
 	initRaycaster();
-	runGame(&gameData);
-
+	runGame(&gameData, &audioData);
 	destroyGFX();
 	return (EXIT_SUCCESS);
 }

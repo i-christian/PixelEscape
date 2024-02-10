@@ -5,7 +5,7 @@
  * Return: nothing
  */
 
-void runGame(gameData *gameData)
+void runGame(gameData *gameData, AudioData *audioData)
 {
     long gameTicks = 0;
     long time;
@@ -24,6 +24,7 @@ void runGame(gameData *gameData)
 
         /* Render a frame */
         render(gameData);
+		playBackgroundMusic(audioData);
 
         /* Fixed delay before next frame */
         SDL_Delay(10);
