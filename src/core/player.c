@@ -22,7 +22,9 @@ char playerIsRunning = FALSE;
  */
 void rotatePlayer(Matrix3f* rotMatrix) {
     matrixVectorMultiply(rotMatrix, &playerDir);
+    matrixVectorMultiply(rotMatrix, &viewplaneDir);
 }
+
 
 /**
  * updatePlayer - Update the player's position and direction for the current frame.
