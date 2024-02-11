@@ -1,31 +1,35 @@
 #include <stdlib.h>
-
 #include "../../inc/config.h"
 #include "../../inc/player.h"
 #include "../../inc/raycaster.h"
 
-
 /* Global data */
-Vector3f playerPos    = {PLAYER_START_X, PLAYER_START_Y, 1};
-Vector3f playerDir    = {PLAYER_DIR_X, PLAYER_DIR_Y, 1};
+Vector3f playerPos = {PLAYER_START_X, PLAYER_START_Y, 1};
+Vector3f playerDir = {PLAYER_DIR_X, PLAYER_DIR_Y, 1};
 
 /* Toggles */
-char movingForward    = FALSE;
-char movingBack       = FALSE;
-char turningLeft      = FALSE;
-char turningRight     = FALSE;
-char playerIsRunning  = FALSE;
+char movingForward = FALSE;
+char movingBack = FALSE;
+char turningLeft = FALSE;
+char turningRight = FALSE;
+char playerIsRunning = FALSE;
 
-
+/**
+ * rotatePlayer - Rotate the player direction vector by the given rotation matrix.
+ *
+ * @rotMatrix: Pointer to the rotation matrix.
+ * Return: void
+ */
 void rotatePlayer(Matrix3f* rotMatrix) {
     matrixVectorMultiply(rotMatrix, &playerDir);
-    matrixVectorMultiply(rotMatrix, &viewplaneDir);
 }
 
 /**
- * Update the player for the current frame.
+ * updatePlayer - Update the player's position and direction for the current frame.
+ *
+ * Return: void
  */
-void updatePlayer() {
+void updatePlayer(void) {
     float moveSpeed = PLAYER_MOVEMENT_SPEED;
 
     if(playerIsRunning)
@@ -33,58 +37,53 @@ void updatePlayer() {
 
     if(movingForward) {
         movePlayer(playerDir.x * moveSpeed, playerDir.y * moveSpeed);
-    } if(movingBack) {
+    }
+    if(movingBack) {
         movePlayer(-1 * playerDir.x * moveSpeed, -1 * playerDir.y * moveSpeed);
-    } if(turningLeft) {
+    }
+    if(turningLeft) {
         rotatePlayer(&clockwiseRotation);
         if(playerIsRunning)
             rotatePlayer(&clockwiseRotation);
-    } if(turningRight) {
+    }
+    if(turningRight) {
         rotatePlayer(&counterClockwiseRotation);
         if(playerIsRunning)
             rotatePlayer(&counterClockwiseRotation);
     }
-
 }
 
-
 /**
- * Move the player by a given movement vector.
+ * movePlayer - Move the player by the given movement vector.
  *
- * dx: The x component of the movement vector.
- * dy: The y component of the movement vector.
+ * @dx: The x component of the movement vector.
+ * @dy: The y component of the movement vector.
+ * Return: void
  */
 void movePlayer(float dx, float dy) {
-
-    /* Don't clip if the player doesn't intersect anything */
     if(!clipMovement(dx, dy)) {
         playerPos.x += dx;
         playerPos.y += dy;
         return;
     }
 
-    /* Try clipping off only the x translation */
     if(!clipMovement(0.0f, dy)) {
         playerPos.y += dy;
         return;
     }
 
-    /* Try clipping off only the y translation */
     if(!clipMovement(dx, 0.0f)) {
         playerPos.x += dx;
         return;
     }
 }
 
-
 /**
- * Check if a given movement vector intersects with the world
- * and should be clipped.
+ * clipMovement - Check if a given movement vector intersects with the world and should be clipped.
  *
- * dx: The x component of the movement vector to check.
- * dy: The y component of the movement vector to check.
- *
- * Returns: Zero if the vector should not be clipped, non-zero otherwise.
+ * @dx: The x component of the movement vector to check.
+ * @dy: The y component of the movement vector to check.
+ * Return: Zero if the vector should not be clipped, non-zero otherwise.
  */
 int clipMovement(float dx, float dy) {
     float newx = playerPos.x + dx;
@@ -95,7 +94,6 @@ int clipMovement(float dx, float dy) {
     int y2 = (newy + PLAYER_SIZE) / WALL_SIZE;
     int i, j;
 
-    /* Check all tiles the player occupies */
     for(i = y1; i <= y2; i++) {
         for(j = x1; j <= x2; j++) {
             if(i < 0 || j < 0 || i > MAP_GRID_HEIGHT || j > MAP_GRID_WIDTH || MAP[i][j] > 0) {
@@ -108,12 +106,13 @@ int clipMovement(float dx, float dy) {
 }
 
 /**
- * Initialize the player.
+ * initPlayer - Initialize the player's position based on the map.
+ *
+ * Return: void
  */
-void initPlayer() {
+void initPlayer(void) {
     int row, col;
 
-    /* Search for player position in map */
     for(row = 0; row < MAP_GRID_HEIGHT; row++) {
         for(col = 0; col < MAP_GRID_WIDTH; col++) {
             if(MAP[row][col] == P) {

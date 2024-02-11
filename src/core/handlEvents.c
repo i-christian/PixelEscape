@@ -1,10 +1,14 @@
 #include "../../inc/main.h"
 
 /**
- * handleEvents - event handlers
- * Return: nothing
-*/
-
+ * handleEvents - Event handler function
+ * @gameData: Pointer to game data struct
+ *
+ * This function handles SDL events such as key presses and window events.
+ * It updates the game state based on user input.
+ *
+ * Return: Nothing
+ */
 void handleEvents(gameData *gameData) {
     SDL_Event event;
     char keyIsDown;
@@ -39,13 +43,13 @@ void handleEvents(gameData *gameData) {
                         break;
                     case SDLK_m:
                         if(keyIsDown)
-							gameData->showMap = !(gameData->showMap);
+                            gameData->showMap = !(gameData->showMap);
                         break;
                     case SDLK_d:
                         if(keyIsDown) gameData->distortion = !gameData->distortion;
                         break;
 
-					case SDLK_f:
+                    case SDLK_f:
                         if(keyIsDown) {
                             /* Toggle fullscreen mode */
                             Uint32 fullscreenFlag = SDL_GetWindowFlags(gInstance.window) & SDL_WINDOW_FULLSCREEN;
@@ -76,4 +80,3 @@ void handleEvents(gameData *gameData) {
         }
     }
 }
-

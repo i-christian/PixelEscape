@@ -7,31 +7,27 @@
  *
  * Returns: The magnitude (length) of the vector.
  */
-
 float homogeneousVectorMagnitude(Vector3f* vec) {
     return sqrt(vec->x * vec->x + vec->y * vec->y);
 }
 
-
 /**
  * vectorDotProduct - Find the dot product of two homogeneous 2D vectors.
  *
- * vec1: The first vector.
- * vec2: The second vector.
+ * @vec1: The first vector.
+ * @vec2: The second vector.
  *
  * Returns: Dot product of the first and second vectors.
  */
-
 float vectorDotProduct(Vector3f* vec1, Vector3f* vec2) {
     return vec1->x * vec2->x + vec1->y * vec2->y;
 }
 
-
 /**
  * matrixVectorMultiply - Multiply a 3D vector by a 3D square matrix.
  *
- * mat: The transformation matrix.
- * vec: The vector to be multiplied.
+ * @mat: The transformation matrix.
+ * @vec: The vector to be multiplied.
  */
 void matrixVectorMultiply(Matrix3f* mat, Vector3f* vec) {
     Vector3f newVec;
@@ -42,13 +38,12 @@ void matrixVectorMultiply(Matrix3f* mat, Vector3f* vec) {
     *vec = newVec;
 }
 
-
 /**
  * matrixMatrixMultiply - Multiply a matrix by another matrix.
  * The first matrix will hold the result.
  *
- * mat1: The first matrix.
- * mat2: The second matrix.
+ * @mat1: The first matrix.
+ * @mat2: The second matrix.
  */
 void matrixMatrixMultiply(Matrix3f* mat1, Matrix3f* mat2) {
     int row, col;
@@ -65,7 +60,6 @@ void matrixMatrixMultiply(Matrix3f* mat1, Matrix3f* mat2) {
 
     matrix3fCopy(mat1, &retMat);
 }
-
 
 /**
  * matrix3fCopy - Copy the values of one matrix into another.

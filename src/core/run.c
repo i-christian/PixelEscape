@@ -1,10 +1,17 @@
 #include "../../inc/main.h"
 
 /**
- * runGame - game loop
- * Return: nothing
+ * runGame - Game loop controlling the main flow of the game.
+ *
+ * @gameData: Pointer to the game data struct.
+ * @audioData: Pointer to the audio data struct.
+ *
+ * Description: This function runs the game loop, handling events, updating player position,
+ * updating the raycaster, rendering frames, and playing background music.
+ * It also includes a fixed delay between frames and prints FPS every 500 frames.
+ *
+ * Return: void
  */
-
 void runGame(gameData *gameData, AudioData *audioData)
 {
     long gameTicks = 0;
