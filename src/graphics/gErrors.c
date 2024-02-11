@@ -3,17 +3,22 @@
 /* Error string buffer */
 char errstr[256];
 
-/**gfxGetError - a getter graphics errors function
- *Return: nothing
+/**
+ * gfxGetError - Get the graphics error string.
+ *
+ * Returns: The graphics error string.
  */
 const char* gfxGetError(void) {
     return (errstr);
 }
 
-/**gfxSetError - a setter graphics errors function
- *@str: param1
- *@showSdlErr: param2
- *Return: nothing
+/**
+ * gfxSetError - Set the graphics error string.
+ *
+ * @str: The error message to set.
+ * @showSdlErr: Flag indicating whether to append SDL error message.
+ *
+ * Returns: Nothing.
  */
 void gfxSetError(char* str, char showSdlErr) {
     if(showSdlErr)

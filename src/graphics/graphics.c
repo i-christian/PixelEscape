@@ -3,23 +3,24 @@
 #include <SDL2/SDL_video.h>
 
 
-// Define and initialize the variables
 ManagedTexture_* managedTextures = NULL;
 SDL_Instance gInstance = { NULL, NULL };
 unsigned int screenWidth = -1;
 unsigned int screenHeight = -1;
 
-/*graphics functions for this game*/
+/* Graphics functions for this game */
 
 /**
- * initGFX - initializing graphics
+ * initGFX - Initializing graphics.
  *
+ * @title: The title of the game window.
+ * @width: The width of the game window.
+ * @height: The height of the game window.
  *
+ * This function initializes the graphics components, creates an SDL window, and sets up a renderer.
  *
- *
- * Return: an integer
+ * Return: 1 on success, 0 on failure.
  */
-
 int initGFX(char* title, unsigned int width, unsigned int height)
 {
 	if(gInstance.window || gInstance.renderer) return 0;
@@ -49,8 +50,16 @@ int initGFX(char* title, unsigned int width, unsigned int height)
     return 1;
 }
 
-
-
+/**
+ * createTexture - Create a managed texture.
+ *
+ * @width: The width of the texture.
+ * @height: The height of the texture.
+ *
+ * This function creates a managed texture and returns a pointer to the pixel data.
+ *
+ * Return: A pointer to the pixel data of the created texture.
+ */
 void* createTexture(unsigned int width, unsigned int height)
 {
     Uint32* data;
@@ -99,7 +108,15 @@ void* createTexture(unsigned int width, unsigned int height)
 }
 
 
-
+/**
+ * destroyTexture - Destroy a managed texture.
+ *
+ * @ptr: A pointer to the pixel data of the texture.
+ *
+ * This function destroys a managed texture and frees associated memory.
+ *
+ * Return: 1 on success, 0 on failure.
+ */
 int destroyTexture(void* ptr) {
     /* Recover the memory management structure before freeing anything */
     ManagedTexture_* mtex = *(((ManagedTexture_**)ptr) - 1);
@@ -127,6 +144,15 @@ int destroyTexture(void* ptr) {
 }
 
 
+/**
+ * displayFullscreenTexture - Display a managed texture in fullscreen.
+ *
+ * @texture: A pointer to the pixel data of the texture.
+ *
+ * This function updates and renders a managed texture in fullscreen.
+ *
+ * Return: void
+ */
 void displayFullscreenTexture(void* texture)
 {
     ManagedTexture_* mtex;
@@ -153,6 +179,13 @@ void displayFullscreenTexture(void* texture)
 }
 
 
+/**
+ * destroyGFX - Destroy graphics components.
+ *
+ * This function cleans up allocated textures and destroys SDL window and renderer.
+ *
+ * Return: void
+ */
 void destroyGFX()
 {
     /* Destroy all allocated textures */
