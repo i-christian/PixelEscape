@@ -4,7 +4,7 @@
 CC = gcc
 
 # Compiler flags
-CFLAGS = -Wall -Werror -Wextra -pedantic -std=c99 -g
+CFLAGS = -Wall -Werror -Wextra -pedantic -std=c99
 
 # Directories
 INCDIR = inc
