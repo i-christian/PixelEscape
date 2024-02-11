@@ -1,18 +1,24 @@
 #include "../../inc/audio.h"
 
-
 AudioData audioData;
-// Load background music into memory
-int loadBackgroundMusic(AudioData *audioData)
-{
-    // Load the background music file
+
+/**
+ * loadBackgroundMusic - Loads background music into memory.
+ *
+ * @audioData: Pointer to the AudioData structure.
+ *
+ * This function loads the background music file into memory, allocates memory
+ * for the audio buffer, and reads the background music data into the buffer.
+ *
+ * Return: TRUE if the background music is loaded successfully, FALSE otherwise.
+ */
+int loadBackgroundMusic(AudioData *audioData) {
     audioData->rw = SDL_RWFromFile(BACKGROUND_MUSIC_FILE, "rb");
     if (audioData->rw == NULL) {
         fprintf(stderr, "Failed to load background music file: %s\n", SDL_GetError());
         return FALSE;
     }
 
-    // Read the background music data
     audioData->audioLength = SDL_RWsize(audioData->rw);
     audioData->audioBuffer = (Uint8 *)malloc(audioData->audioLength);
     if (audioData->audioBuffer == NULL) {
@@ -32,9 +38,20 @@ int loadBackgroundMusic(AudioData *audioData)
     return TRUE;
 }
 
-// Audio callback function
+/**
+ * audioCallback - Audio callback function.
+ *
+ * @userdata: Pointer to user data (unused).
+ * @stream: Pointer to the audio stream buffer.
+ * @len: Length of the audio stream buffer.
+ *
+ * This function is the callback used by SDL to fill the audio stream buffer.
+ * It copies audio data from the internal audio buffer to the stream buffer.
+ *
+ * Return: void
+ */
 void audioCallback(void *userdata, Uint8 *stream, Uint32 len) {
-	(void)userdata;
+    (void)userdata;
     if (audioData.audioLength == 0) {
         return;
     }
@@ -46,16 +63,22 @@ void audioCallback(void *userdata, Uint8 *stream, Uint32 len) {
     audioData.audioLength -= len;
 }
 
-
-
-// Function to initialize SDL audio
+/**
+ * initSDLAudio - Initializes SDL audio subsystem and sets audio specifications.
+ *
+ * @audioData: Pointer to the AudioData structure.
+ *
+ * This function initializes the SDL audio subsystem, sets the desired audio
+ * specifications, opens the audio device, and sets the audio callback function.
+ *
+ * Return: TRUE if SDL audio initializes successfully, FALSE otherwise.
+ */
 int initSDLAudio(AudioData *audioData) {
     if (SDL_Init(SDL_INIT_AUDIO) < 0) {
         fprintf(stderr, "SDL audio could not initialize! SDL Error: %s\n", SDL_GetError());
         return FALSE;
     }
 
-    // Set the audio specifications
     audioData->audioSpec.freq = 44100;
     audioData->audioSpec.format = AUDIO_S16SYS;
     audioData->audioSpec.channels = 2;
@@ -73,12 +96,28 @@ int initSDLAudio(AudioData *audioData) {
     return TRUE;
 }
 
-// Function to play background music
+/**
+ * playBackgroundMusic - Starts playing background music.
+ *
+ * @audioData: Pointer to the AudioData structure.
+ *
+ * This function resumes playing the background music by unpausing the audio device.
+ *
+ * Return: void
+ */
 void playBackgroundMusic(AudioData *audioData) {
-    SDL_PauseAudioDevice(audioData->audioDeviceID, 0); // Start playing audio
+    SDL_PauseAudioDevice(audioData->audioDeviceID, 0);
 }
 
-// Function to free resources and quit SDL audio
+/**
+ * closeSDLAudio - Frees resources and quits SDL audio subsystem.
+ *
+ * @audioData: Pointer to the AudioData structure.
+ *
+ * This function frees memory allocated for the audio buffer and closes the audio device.
+ *
+ * Return: void
+ */
 void closeSDLAudio(AudioData *audioData) {
     if (audioData->audioBuffer != NULL) {
         free(audioData->audioBuffer);
