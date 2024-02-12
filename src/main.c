@@ -1,48 +1,7 @@
 #include "../inc/main.h"
 #include <SDL2/SDL_audio.h>
 #include <stdio.h>
-
-/*const short MAP[MAP_GRID_HEIGHT][MAP_GRID_WIDTH] = {
-	{R, R, R, R, R, R, R, R, R, R},
-	{R, 0, 0, 0, 0, 0, 0, 0, 0, R},
-	{R, 0, 0, G, G, G, G, G, 0, R},
-	{R, 0, 0, G, 0, 0, 0, G, 0, R},
-	{R, 0, 0, G, 0, G, 0, G, 0, R},
-	{R, 0, 0, 0, 0, G, 0, G, 0, R},
-	{R, 0, G, G, G, G, 0, G, 0, R},
-	{R, 0, 0, 0, 0, 0, 0, G, 0, R},
-	{R, 0, 0, 0, 0, 0, 0, 0, 0, R},
-	{R, R, R, R, R, R, R, R, R, R}
-};*/
-
-const short MAP[MAP_GRID_HEIGHT][MAP_GRID_WIDTH] =
-{
-  {R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R},
-  {R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,R},
-  {R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,R},
-  {R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,R},
-  {R,0,0,0,0,0,G,G,G,G,G,0,0,0,0,G,G,G,G,G,G,0,0,R},
-  {R,0,0,0,0,0,G,0,0,0,G,0,0,0,0,G,0,0,0,0,G,0,0,R},
-  {R,0,0,0,0,0,G,0,0,0,G,0,0,0,0,B,0,0,0,0,G,0,0,R},
-  {R,0,0,0,0,0,G,0,0,0,G,0,0,0,0,G,0,0,0,0,G,0,0,R},
-  {R,0,0,0,0,0,G,G,0,G,G,0,0,0,0,G,G,G,G,G,G,0,0,R},
-  {R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,G,0,0,R},
-  {R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,G,0,0,R},
-  {R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,G,0,0,R},
-  {R,0,0,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,R},
-  {R,0,0,0,0,0,0,0,0,0,0,0,0,0,G,0,0,0,0,0,0,0,0,R},
-  {R,0,0,0,0,0,0,0,0,0,0,0,0,0,G,0,0,0,0,0,0,0,0,R},
-  {R,0,0,0,0,0,0,0,0,0,0,0,0,0,G,0,0,0,0,0,0,0,0,R},
-  {R,G,G,G,G,G,G,G,G,0,0,0,0,0,G,0,0,0,0,0,0,0,0,R},
-  {R,0,0,G,0,0,0,0,G,0,0,0,0,0,G,0,0,0,0,0,0,0,0,R},
-  {R,0,0,0,0,0,B,0,G,0,0,0,0,0,G,0,0,0,0,0,0,0,0,R},
-  {R,0,0,G,0,0,0,0,G,0,0,0,0,0,G,0,0,0,0,0,0,0,0,R},
-  {R,0,0,G,G,G,G,G,G,0,0,0,0,0,G,0,0,0,0,0,0,0,0,R},
-  {R,0,0,0,0,0,0,0,0,0,0,0,0,0,G,0,0,0,0,0,0,0,0,R},
-  {R,0,0,0,0,0,0,0,0,0,0,0,0,0,G,0,0,0,0,0,0,0,0,R},
-  {R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R}
-};
-
+#include <stdlib.h>
 
 /**
  * render - rendering function
@@ -128,8 +87,15 @@ void initAudio(AudioData *audioData)
  * main - the main entry of the program
  * Return: exit status
  */
-int main(void)
+int main(int argc, char **argv)
 {
+	if (argc != 2){
+		fprintf(stderr, "Usage: %s <map_file>\n", argv[0]);
+		return (EXIT_FAILURE);
+	}
+
+	readMapFromFile(argv[1], MAP);
+
     gameData gameData;
     gameData.screenBuffer = NULL;
     gameData.redXorTexture = NULL;

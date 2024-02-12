@@ -62,7 +62,7 @@ extern char rayCastMode;
 
 
 /* Globals */
-extern const short MAP[MAP_GRID_HEIGHT][MAP_GRID_WIDTH];
+extern short MAP[MAP_GRID_HEIGHT][MAP_GRID_WIDTH];
 extern char distortion;
 extern char textureMode;
 extern Uint32 *screenBuffer;
