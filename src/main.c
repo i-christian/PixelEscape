@@ -104,7 +104,7 @@ int main(int argc, char **argv)
     gameData.grayXorTexture = NULL;
     /*initialize colors */
     gameData.COLORS[0] = RGBtoABGR(255, 0, 0);
-    gameData.COLORS[R] = RGBtoABGR(0, 255, 0);
+    gameData.COLORS[1] = RGBtoABGR(0, 255, 0);
     gameData.COLORS[2] = RGBtoABGR(0, 0, 255);
     gameData.COLORS[3] = RGBtoABGR(128, 128, 128);
     /*program toggles */

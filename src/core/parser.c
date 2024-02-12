@@ -1,4 +1,6 @@
 #include "../../inc/main.h"
+#include <errno.h>
+
 
 short MAP[MAP_GRID_HEIGHT][MAP_GRID_HEIGHT];
 
@@ -12,18 +14,19 @@ short MAP[MAP_GRID_HEIGHT][MAP_GRID_HEIGHT];
  *
  * Return: This function does not return any value.
  */
-
-void readMapFromFile(const char *filename, short color_map[MAP_GRID_HEIGHT][MAP_GRID_WIDTH]) {
-    // Open file for reading in binary mode
-    SDL_RWops* file = SDL_RWFromFile(filename, "rb");
+void readMapFromFile(const char *filename, short map[MAP_GRID_HEIGHT][MAP_GRID_WIDTH])
+{
+    FILE* file = fopen(filename, "r");
     if (file == NULL) {
-        fprintf(stderr, "Unable to open file for reading: %s\n", SDL_GetError());
+        fprintf(stderr, "Unable to open file for reading: %s\n", strerror(errno));
         return;
     }
 
-    /* Read the content of the file into the map array */
-    SDL_RWread(file, color_map, sizeof(short), MAP_GRID_HEIGHT * MAP_GRID_WIDTH);
+    for (int i = 0; i < MAP_GRID_HEIGHT; ++i) {
+        for (int j = 0; j < MAP_GRID_WIDTH; ++j) {
+            fscanf(file, "%hd", &map[i][j]);
+        }
+    }
 
-    // Close the file
-    SDL_RWclose(file);
+    fclose(file);
 }
