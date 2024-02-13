@@ -90,7 +90,7 @@ void initAudio(AudioData *audioData)
 int main(int argc, char **argv)
 {
 	if (argc != 2){
-		fprintf(stderr, "Usage: %s <map_file>\n", argv[0]);
+		fprintf(stderr, "Usage: %s <maps/map_file>\n", argv[0]);
 		return (EXIT_FAILURE);
 	}
 
@@ -113,7 +113,7 @@ int main(int argc, char **argv)
     gameData.distortion = FALSE;
     gameData.slowRenderMode = 0;
     gameData.rayCastMode = 0;
-    gameData.textureMode = 0;
+    gameData.textureMode = 1;
 
     if (!setupWindow(&gameData))
     {

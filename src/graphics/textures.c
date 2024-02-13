@@ -28,7 +28,7 @@ Uint32* generateXorTexture(int size, int redmask, int greenmask, int bluemask) {
 
 
 /**
- * generateGreenXorTexture - Generate an XOR texture of the specified size with green color.
+ * generateGreenXorTexture - Generate an XOR texture of the specified size with red color.
  *
  * @size: The size of the texture.
  *
@@ -41,7 +41,7 @@ Uint32* generateRedXorTexture(int size) {
 
 
 /**
- * generateBlueXorTexture - Generate an XOR texture of the specified size with blue color.
+ * generateBlueXorTexture - Generate an XOR texture of the specified size with green color.
  *
  * @size: The size of the texture.
  *
@@ -74,4 +74,3 @@ Uint32* generateBlueXorTexture(int size) {
 Uint32* generateGrayXorTexture(int size) {
     return generateXorTexture(size, 0xFF, 0xFF, 0xFF);
 }
-

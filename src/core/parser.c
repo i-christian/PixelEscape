@@ -7,9 +7,9 @@ short MAP[MAP_GRID_HEIGHT][MAP_GRID_HEIGHT];
 /**
  * readMapFromFile - Function to read the map from file and generate the color map array
  * @filename: The name of the file to be read
- * @color_map: The array to store the color map
+ * @map: The array to store the color map
  *
- * Description: This function reads the content of the file specified by filename in binary mode and
+ * Description: This function reads the content of the file specified by filename in text file mode and
  * stores it into the color_map array.
  *
  * Return: This function does not return any value.
