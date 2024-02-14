@@ -45,7 +45,7 @@ int setupWindow(gameData *gameData)
     gameData->blueXorTexture = generateBlueXorTexture(TEXTURE_SIZE);
     gameData->grayXorTexture = generateGrayXorTexture(TEXTURE_SIZE);
     gameData->TEXTURES[0] = gameData->redXorTexture;
-    gameData->TEXTURES[R] = gameData->greenXorTexture;
+    gameData->TEXTURES[1] = gameData->greenXorTexture;
     gameData->TEXTURES[2] = gameData->blueXorTexture;
     gameData->TEXTURES[3] = gameData->grayXorTexture;
 
