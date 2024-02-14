@@ -50,7 +50,7 @@ int loadBackgroundMusic(AudioData *audioData) {
  *
  * Return: void
  */
-void audioCallback(void *userdata, Uint8 *stream, Uint32 len) {
+/*void audioCallback(void *userdata, Uint8 *stream, Uint32 len) {
     (void)userdata;
     if (audioData.audioLength == 0) {
         return;
@@ -61,6 +61,38 @@ void audioCallback(void *userdata, Uint8 *stream, Uint32 len) {
     SDL_MixAudio(stream, audioData.audioBuffer, len, SDL_MIX_MAXVOLUME);
     audioData.audioBuffer += len;
     audioData.audioLength -= len;
+}*/
+
+void audioCallback(void *userdata, Uint8 *stream, Uint32 len) {
+    (void)userdata;
+
+    // Static variables to maintain state across function calls
+    static Uint8 *audioBufferPtr = NULL;
+    static Uint32 remainingLength = 0;
+
+    // Initialize static variables on first function call
+    if (audioBufferPtr == NULL || remainingLength == 0) {
+        audioBufferPtr = audioData.audioBuffer;
+        remainingLength = audioData.audioLength;
+    }
+
+    if (audioData.audioLength == 0) {
+        return;
+    }
+
+    // If remaining length is less than len, loop back to the beginning
+    if (remainingLength < len) {
+        audioBufferPtr = audioData.audioBuffer;
+        remainingLength = audioData.audioLength;
+    }
+
+    // Copy audio data from the internal audio buffer to the stream buffer
+    SDL_memcpy(stream, audioBufferPtr, len);
+    SDL_MixAudio(stream, audioBufferPtr, len, SDL_MIX_MAXVOLUME);
+
+    // Update pointers and remaining length
+    audioBufferPtr += len;
+    remainingLength -= len;
 }
 
 /**
