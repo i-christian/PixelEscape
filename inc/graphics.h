@@ -77,4 +77,5 @@ Uint32 *generateGreenXorTexture(int size);
 Uint32 *generateBlueXorTexture(int size);
 Uint32 *generateGrayXorTexture(int size);
 
+
 #endif /* GFX_H */

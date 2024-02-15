@@ -68,6 +68,7 @@ void drawTexturedStrip(gameData *gameData, int x, float wallYStart, float length
 
         if(y < wallYStart) {
             gameData->screenBuffer[XY_TO_SCREEN_INDEX(x, y)] = CEILING_COLOR;
+			color = texture[XY_TO_TEXTURE_INDEX(textureX, (int)ty)];
         } else if(y > (wallYStart + length)) {
             gameData->screenBuffer[XY_TO_SCREEN_INDEX(x, y)] = FLOOR_COLOR;
         } else {
