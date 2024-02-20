@@ -10,7 +10,7 @@ Embark on a thrilling journey through a captivating 3D maze rendered using rayca
 
 - **Deployed Site**: [PixelEscape Demo](https://i-christian.github.io/alx-landing_Page/)
 - **Final Project Blog Article**: [PixelEscape: Exploring 3D Raycasting](https://medium.com/@icmhango/my-journey-in-raycasting-a-3d-game-development-odyssey-aaf2764a3c82)
-- **Author(s) LinkedIn**: [Christian Mhango](https://www.linkedin.com/in/i-christian/)
+- **Author(s) LinkedIn**: [Christian Mhango](https://www.linkedin.com/in/i-christian/)  [Maxwell Kajiwonele](https://www.linkedin.com/in/mkajiwonele/)
 
 ### Description
 PixelEscape is a 3D maze adventure game developed using raycasting techniques. It offers an immersive experience with dynamic lighting, weather effects, and customizable maps.
