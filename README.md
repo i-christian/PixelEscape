@@ -65,7 +65,7 @@ To install PixelEscape, follow these steps:
 - Explore the map, solve puzzles, and find the exit to win! 🏆
 
 ### Screenshots
-![PixelEscape Screenshot](screenshot.png)
+![PixelEscape Screenshot](https://github.com/i-christian/pixel_escape/blob/main/src/assets/images/game.png)
 
 ### Contributing
 Contributions to PixelEscape are welcome! If you'd like to contribute, please follow the guidelines outlined in the [CONTRIBUTING.md](CONTRIBUTING.md) file.
