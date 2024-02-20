@@ -16,7 +16,7 @@ int loadBackgroundMusic(AudioData *audioData) {
     audioData->rw = SDL_RWFromFile(BACKGROUND_MUSIC_FILE, "rb");
     if (audioData->rw == NULL) {
         fprintf(stderr, "Failed to load background music file: %s\n", SDL_GetError());
-        return FALSE;
+        return (FALSE);
     }
 
     audioData->audioLength = SDL_RWsize(audioData->rw);
@@ -24,18 +24,18 @@ int loadBackgroundMusic(AudioData *audioData) {
     if (audioData->audioBuffer == NULL) {
         fprintf(stderr, "Failed to allocate memory for background music: %s\n", SDL_GetError());
         SDL_RWclose(audioData->rw);
-        return FALSE;
+        return (FALSE);
     }
 
     if (SDL_RWread(audioData->rw, audioData->audioBuffer, 1, audioData->audioLength) != audioData->audioLength) {
         fprintf(stderr, "Failed to read background music data: %s\n", SDL_GetError());
         SDL_RWclose(audioData->rw);
         free(audioData->audioBuffer);
-        return FALSE;
+        return (FALSE);
     }
 
     SDL_RWclose(audioData->rw);
-    return TRUE;
+    return (TRUE);
 }
 
 /**
@@ -50,18 +50,6 @@ int loadBackgroundMusic(AudioData *audioData) {
  *
  * Return: void
  */
-/*void audioCallback(void *userdata, Uint8 *stream, Uint32 len) {
-    (void)userdata;
-    if (audioData.audioLength == 0) {
-        return;
-    }
-
-    len = (len > audioData.audioLength ? audioData.audioLength : len);
-    SDL_memcpy(stream, audioData.audioBuffer, len);
-    SDL_MixAudio(stream, audioData.audioBuffer, len, SDL_MIX_MAXVOLUME);
-    audioData.audioBuffer += len;
-    audioData.audioLength -= len;
-}*/
 
 void audioCallback(void *userdata, Uint8 *stream, Uint32 len) {
     (void)userdata;
@@ -108,7 +96,7 @@ void audioCallback(void *userdata, Uint8 *stream, Uint32 len) {
 int initSDLAudio(AudioData *audioData) {
     if (SDL_Init(SDL_INIT_AUDIO) < 0) {
         fprintf(stderr, "SDL audio could not initialize! SDL Error: %s\n", SDL_GetError());
-        return FALSE;
+        return (FALSE);
     }
 
     audioData->audioSpec.freq = 44100;
@@ -122,10 +110,10 @@ int initSDLAudio(AudioData *audioData) {
     if (audioData->audioDeviceID == 0) {
         fprintf(stderr, "Failed to open audio: %s\n", SDL_GetError());
         SDL_Quit();
-        return FALSE;
+        return (FALSE);
     }
 
-    return TRUE;
+    return (TRUE);
 }
 
 /**

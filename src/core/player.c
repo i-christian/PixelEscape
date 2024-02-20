@@ -99,12 +99,12 @@ int clipMovement(float dx, float dy) {
     for(i = y1; i <= y2; i++) {
         for(j = x1; j <= x2; j++) {
             if(i < 0 || j < 0 || i > MAP_GRID_HEIGHT || j > MAP_GRID_WIDTH || MAP[i][j] > 0) {
-                return TRUE;
+                return (TRUE);
             }
         }
     }
 
-    return FALSE;
+    return (FALSE);
 }
 
 /**

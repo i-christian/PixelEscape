@@ -30,7 +30,7 @@ int initGFX(char* title, unsigned int width, unsigned int height)
 
     if(SDL_Init(SDL_INIT_VIDEO) < 0) {
         gfxSetError("Error initializing SDL", 1);
-        return 0;
+        return (0);
     }
 
     gInstance.window = SDL_CreateWindow(title, 50, 50, width, height, SDL_WINDOW_SHOWN);
@@ -38,7 +38,7 @@ int initGFX(char* title, unsigned int width, unsigned int height)
 
     if(!gInstance.window || !gInstance.renderer) {
         gfxSetError("Could not create SDL window", 1);
-        return 0;
+        return (0);
     }
 
     SDL_SetWindowTitle(gInstance.window, title);
@@ -47,8 +47,9 @@ int initGFX(char* title, unsigned int width, unsigned int height)
     SDL_RenderClear(gInstance.renderer);
     SDL_RenderPresent(gInstance.renderer);
 
-    return 1;
+    return (1);
 }
+
 
 /**
  * createTexture - Create a managed texture.
@@ -60,16 +61,22 @@ int initGFX(char* title, unsigned int width, unsigned int height)
  *
  * Return: A pointer to the pixel data of the created texture.
  */
+
 void* createTexture(unsigned int width, unsigned int height)
 {
     Uint32* data;
     ManagedTexture_* newmtex;
     if(!width || !height || !gInstance.renderer) {
         gfxSetError("SDL window has not been initialized yet", 0);
-        return NULL;
+        return (NULL);
     }
 
-    newmtex = malloc(sizeof(ManagedTexture_)); if(!newmtex) { return NULL; }
+    newmtex = malloc(sizeof(ManagedTexture_));
+
+	if(!newmtex)
+	{
+		return (NULL);
+	}
     newmtex->pitch = width * sizeof(Uint32);
     newmtex->next = NULL;
     newmtex->prev = NULL;
@@ -81,10 +88,16 @@ void* createTexture(unsigned int width, unsigned int height)
     if(!(newmtex->texture)) {
         free(newmtex);
         gfxSetError("Could not create texture", 1);
-        return NULL;
+        return (NULL);
     }
 
-    data = malloc((sizeof(Uint32) * width * height) + sizeof(ManagedTexture_*)); if(!data) {free(newmtex); return NULL; }
+    data = malloc((sizeof(Uint32) * width * height) + sizeof(ManagedTexture_*));
+
+	if(!data)
+	{
+		free(newmtex);
+		return (NULL);
+	}
 
     /*
      * Hide a pointer to the managed struct before the actual pixel data.
@@ -104,7 +117,7 @@ void* createTexture(unsigned int width, unsigned int height)
     managedTextures = newmtex;
 
 
-    return newmtex->pixelData;
+    return (newmtex->pixelData);
 }
 
 
@@ -124,7 +137,7 @@ int destroyTexture(void* ptr) {
     /* Don't do anything if it's not actually a managed structure */
     if(mtex->magicTag != TEX_TAG) {
         gfxSetError("Not a valid texture pointer", 0);
-        return 0;
+        return (0);
     }
 
     /* Prevent this structure from being somehow sent here again */
@@ -140,7 +153,7 @@ int destroyTexture(void* ptr) {
     if(managedTextures == mtex) managedTextures = mtex->next;
     free(mtex);
 
-    return 1;
+    return (1);
 }
 
 

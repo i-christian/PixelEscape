@@ -9,7 +9,7 @@
  * Returns: The pixel height of a vertical column to draw.
  */
 float calculateDrawHeight(float rayLength) {
-    return distFromViewplane * WALL_SIZE / rayLength;
+    return (distFromViewplane * WALL_SIZE / rayLength);
 }
 
 
@@ -96,12 +96,12 @@ int getTextureColumnNumberForRay(Vector3f* ray, RayType rtype) {
         if(ray->y < 0)
             return (int)rayHitPos.x % TEXTURE_SIZE;
         else
-            return TEXTURE_SIZE - 1 - ((int)rayHitPos.x % TEXTURE_SIZE);
+            return (TEXTURE_SIZE - 1 - ((int)rayHitPos.x % TEXTURE_SIZE));
     } else {
         if(ray->x > 0)
-            return (int)rayHitPos.y % TEXTURE_SIZE;
+            return ((int)rayHitPos.y % TEXTURE_SIZE);
         else
-            return TEXTURE_SIZE - 1 - ((int)rayHitPos.y % TEXTURE_SIZE);
+            return (TEXTURE_SIZE - 1 - ((int)rayHitPos.y % TEXTURE_SIZE));
     }
 }
 
@@ -119,7 +119,7 @@ float getUndistortedRayLength(Vector3f* ray) {
     Vector3f proj = vectorProjection(ray, &viewplaneDir);
     undistortedRay = vectorSubtract(ray, &proj);
 
-    return homogeneousVectorMagnitude(&undistortedRay);
+    return (homogeneousVectorMagnitude(&undistortedRay));
 }
 
 

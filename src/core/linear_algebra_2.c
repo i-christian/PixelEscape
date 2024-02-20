@@ -8,7 +8,7 @@
  * Returns: The magnitude (length) of the vector.
  */
 float homogeneousVectorMagnitude(Vector3f* vec) {
-    return sqrt(vec->x * vec->x + vec->y * vec->y);
+    return (sqrt(vec->x * vec->x + vec->y * vec->y));
 }
 
 /**
@@ -20,7 +20,7 @@ float homogeneousVectorMagnitude(Vector3f* vec) {
  * Returns: Dot product of the first and second vectors.
  */
 float vectorDotProduct(Vector3f* vec1, Vector3f* vec2) {
-    return vec1->x * vec2->x + vec1->y * vec2->y;
+    return (vec1->x * vec2->x + vec1->y * vec2->y);
 }
 
 /**
@@ -28,6 +28,7 @@ float vectorDotProduct(Vector3f* vec1, Vector3f* vec2) {
  *
  * @mat: The transformation matrix.
  * @vec: The vector to be multiplied.
+ * Return: Nothing to return
  */
 void matrixVectorMultiply(Matrix3f* mat, Vector3f* vec) {
     Vector3f newVec;
@@ -44,6 +45,7 @@ void matrixVectorMultiply(Matrix3f* mat, Vector3f* vec) {
  *
  * @mat1: The first matrix.
  * @mat2: The second matrix.
+ * Return: nothing
  */
 void matrixMatrixMultiply(Matrix3f* mat1, Matrix3f* mat2) {
     int row, col;
@@ -66,6 +68,7 @@ void matrixMatrixMultiply(Matrix3f* mat1, Matrix3f* mat2) {
  *
  * @dst: The destination matrix.
  * @src: The source matrix.
+ * Return: nothing
  */
 void matrix3fCopy(Matrix3f* dst, Matrix3f* src) {
     int row, col;
